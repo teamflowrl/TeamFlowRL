@@ -5,7 +5,7 @@ Multi-Agent Coordination**.
 
 Guowei Zou, Beiwen Zhang, Haitao Wang, Hong Hong, Zhiquan Chen, Hejun Wu (Sun Yat-sen University)
 
-[Project page](https://teamflowrl.github.io/) · [Models](https://huggingface.co/teamflowrl)
+[Project page](https://teamflowrl.github.io/) · [Models](https://huggingface.co/teamflowrl/TeamFlowRL)
 
 TeamFlowRL fine-tunes offline-pretrained flow policies online with MAPPO. Every
 agent executes its own flow policy from its local observation; the
