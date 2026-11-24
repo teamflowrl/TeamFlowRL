@@ -223,6 +223,10 @@ GAE, exact step budgets, resume, and the three-seed CLI. Further tests:
 `ablations/ratio/per_step_clip/test_stepwise.py`, `robots/core/test_v4.py`,
 `robots/core/test_memoryless.py`.
 
+## License
+
+The code is released under the [MIT License](LICENSE). Third-party code keeps its original license: the Multi-Agent MuJoCo environments under `*/vendor/multiagent_mujoco` (Apache 2.0) and the multi-agent particle environments under `*/vendor/multiagent` (MIT). Simulators and datasets are obtained separately under their own terms.
+
 ## Citation
 
 ```bibtex
