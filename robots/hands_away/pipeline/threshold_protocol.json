@@ -1,0 +1,16 @@
+{
+  "version": "hands_away_v3",
+  "frozen_before_distance_statistics": true,
+  "baseline_source": "results/baseline/*/baseline.json",
+  "split": "sort episode seeds ascending; first 50 calibration, last 50 validation; each run must have 100 distinct seeds",
+  "metric": "For each consecutive 10-control-step window whose original and placed flags are all true, minimum TCP-to-nearest-cube distance over both arms and all 10 steps. Episode statistic is maximum over these windows; no valid window gives null (never counts as withdrawal).",
+  "threshold_rule": "Per task max(fixed floor: ms=0.12 m/rf=0.15 m, largest calibration episode statistic across all four methods + 0.01 m).",
+  "allowed_empirical_false_positive_rate": 0.05,
+  "validation_denominators": [
+    "all 50 held-out episodes per method",
+    "held-out episodes having a valid original 10-step window"
+  ],
+  "minimum_valid_episodes_per_split_per_method": 20,
+  "no_validation_retuning": true,
+  "inference_limit": "Acceptance is empirical on held-out episodes, not a population-rate confidence guarantee."
+}

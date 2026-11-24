@@ -1,0 +1,416 @@
+[
+  {
+    "config": "configs/benchmarks/mpe__simple_spread__expert.json",
+    "benchmark": "mpe",
+    "task": "simple_spread",
+    "dataset": "expert",
+    "code_variant": "root",
+    "runtime_dir": "envs/mpe/runtimes/mpe_rt1",
+    "online_steps": 200000000
+  },
+  {
+    "config": "configs/benchmarks/mpe__simple_spread__medium.json",
+    "benchmark": "mpe",
+    "task": "simple_spread",
+    "dataset": "medium",
+    "code_variant": "root",
+    "runtime_dir": "envs/mpe/runtimes/mpe_rt1",
+    "online_steps": 150000000
+  },
+  {
+    "config": "configs/benchmarks/mpe__simple_spread__medium-replay.json",
+    "benchmark": "mpe",
+    "task": "simple_spread",
+    "dataset": "medium-replay",
+    "code_variant": "root",
+    "runtime_dir": "envs/mpe/runtimes/mpe_rt4",
+    "online_steps": 150000000
+  },
+  {
+    "config": "configs/benchmarks/mpe__simple_tag__expert.json",
+    "benchmark": "mpe",
+    "task": "simple_tag",
+    "dataset": "expert",
+    "code_variant": "root",
+    "runtime_dir": "envs/mpe/runtimes/mpe_rt1",
+    "online_steps": 150000000
+  },
+  {
+    "config": "configs/benchmarks/mpe__simple_tag__medium.json",
+    "benchmark": "mpe",
+    "task": "simple_tag",
+    "dataset": "medium",
+    "code_variant": "root",
+    "runtime_dir": "envs/mpe/runtimes/mpe_rt1",
+    "online_steps": 150000000
+  },
+  {
+    "config": "configs/benchmarks/mpe__simple_tag__random.json",
+    "benchmark": "mpe",
+    "task": "simple_tag",
+    "dataset": "random",
+    "code_variant": "root",
+    "runtime_dir": "envs/mpe/runtimes/mpe_rt3",
+    "online_steps": 100000000
+  },
+  {
+    "config": "configs/benchmarks/mpe__simple_world__expert.json",
+    "benchmark": "mpe",
+    "task": "simple_world",
+    "dataset": "expert",
+    "code_variant": "root",
+    "runtime_dir": "envs/mpe/runtimes/mpe_rt2",
+    "online_steps": 150000000
+  },
+  {
+    "config": "configs/benchmarks/mpe__simple_world__medium.json",
+    "benchmark": "mpe",
+    "task": "simple_world",
+    "dataset": "medium",
+    "code_variant": "root",
+    "runtime_dir": "envs/mpe/runtimes/mpe_rt2",
+    "online_steps": 150000000
+  },
+  {
+    "config": "configs/benchmarks/mpe__simple_world__random.json",
+    "benchmark": "mpe",
+    "task": "simple_world",
+    "dataset": "random",
+    "code_variant": "root",
+    "runtime_dir": "envs/mpe/runtimes/mpe_rt3",
+    "online_steps": 100000000
+  },
+  {
+    "config": "configs/benchmarks/mamujoco__2ant__good.json",
+    "benchmark": "mamujoco",
+    "task": "2ant",
+    "dataset": "good",
+    "code_variant": "root",
+    "runtime_dir": "envs/mamujoco/runtimes/mamujoco_rt4",
+    "online_steps": 100000000
+  },
+  {
+    "config": "configs/benchmarks/mamujoco__2ant__medium.json",
+    "benchmark": "mamujoco",
+    "task": "2ant",
+    "dataset": "medium",
+    "code_variant": "root",
+    "runtime_dir": "envs/mamujoco/runtimes/mamujoco_rt4",
+    "online_steps": 100000000
+  },
+  {
+    "config": "configs/benchmarks/mamujoco__2ant__poor.json",
+    "benchmark": "mamujoco",
+    "task": "2ant",
+    "dataset": "poor",
+    "code_variant": "root",
+    "runtime_dir": "envs/mamujoco/runtimes/mamujoco_rt2",
+    "online_steps": 100000000
+  },
+  {
+    "config": "configs/benchmarks/mamujoco__2halfcheetah__medium.json",
+    "benchmark": "mamujoco",
+    "task": "2halfcheetah",
+    "dataset": "medium",
+    "code_variant": "root",
+    "runtime_dir": "envs/mamujoco/runtimes/mamujoco_rt1",
+    "online_steps": 100000000
+  },
+  {
+    "config": "configs/benchmarks/mamujoco__2halfcheetah__poor.json",
+    "benchmark": "mamujoco",
+    "task": "2halfcheetah",
+    "dataset": "poor",
+    "code_variant": "root",
+    "runtime_dir": "envs/mamujoco/runtimes/mamujoco_rt1",
+    "online_steps": 200000000
+  },
+  {
+    "config": "configs/benchmarks/mamujoco__4ant__good.json",
+    "benchmark": "mamujoco",
+    "task": "4ant",
+    "dataset": "good",
+    "code_variant": "root",
+    "runtime_dir": "envs/mamujoco/runtimes/mamujoco_rt3",
+    "online_steps": 100000000
+  },
+  {
+    "config": "configs/benchmarks/mamujoco__4ant__medium.json",
+    "benchmark": "mamujoco",
+    "task": "4ant",
+    "dataset": "medium",
+    "code_variant": "root",
+    "runtime_dir": "envs/mamujoco/runtimes/mamujoco_rt3",
+    "online_steps": 200000000
+  },
+  {
+    "config": "configs/benchmarks/mamujoco__4ant__poor.json",
+    "benchmark": "mamujoco",
+    "task": "4ant",
+    "dataset": "poor",
+    "code_variant": "root",
+    "runtime_dir": "envs/mamujoco/runtimes/mamujoco_rt3",
+    "online_steps": 150000000
+  },
+  {
+    "config": "configs/benchmarks/omiga__6halfcheetah__expert.json",
+    "benchmark": "omiga",
+    "task": "6halfcheetah",
+    "dataset": "expert",
+    "code_variant": "variants/bounded_mean",
+    "runtime_dir": "envs/omiga/runtimes/omiga_rt1",
+    "online_steps": 50000000
+  },
+  {
+    "config": "configs/benchmarks/omiga__6halfcheetah__medium.json",
+    "benchmark": "omiga",
+    "task": "6halfcheetah",
+    "dataset": "medium",
+    "code_variant": "variants/bounded_mean",
+    "runtime_dir": "envs/omiga/runtimes/omiga_rt1",
+    "online_steps": 100000000
+  },
+  {
+    "config": "configs/benchmarks/omiga__6halfcheetah__medium-replay.json",
+    "benchmark": "omiga",
+    "task": "6halfcheetah",
+    "dataset": "medium-replay",
+    "code_variant": "variants/bounded_mean",
+    "runtime_dir": "envs/omiga/runtimes/omiga_rt3",
+    "online_steps": 100000000
+  },
+  {
+    "config": "configs/benchmarks/omiga__6halfcheetah__medium-expert.json",
+    "benchmark": "omiga",
+    "task": "6halfcheetah",
+    "dataset": "medium-expert",
+    "code_variant": "root",
+    "runtime_dir": "envs/omiga/runtimes/omiga_rt1",
+    "online_steps": 100000000
+  },
+  {
+    "config": "configs/benchmarks/omiga__3hopper__expert.json",
+    "benchmark": "omiga",
+    "task": "3hopper",
+    "dataset": "expert",
+    "code_variant": "variants/bounded_mean",
+    "runtime_dir": "envs/omiga/runtimes/omiga_rt1",
+    "online_steps": 50000000
+  },
+  {
+    "config": "configs/benchmarks/omiga__3hopper__medium.json",
+    "benchmark": "omiga",
+    "task": "3hopper",
+    "dataset": "medium",
+    "code_variant": "variants/bounded_mean",
+    "runtime_dir": "envs/omiga/runtimes/omiga_rt1",
+    "online_steps": 100000000
+  },
+  {
+    "config": "configs/benchmarks/omiga__3hopper__medium-replay.json",
+    "benchmark": "omiga",
+    "task": "3hopper",
+    "dataset": "medium-replay",
+    "code_variant": "root",
+    "runtime_dir": "envs/omiga/runtimes/omiga_rt1",
+    "online_steps": 100000000
+  },
+  {
+    "config": "configs/benchmarks/omiga__3hopper__medium-expert.json",
+    "benchmark": "omiga",
+    "task": "3hopper",
+    "dataset": "medium-expert",
+    "code_variant": "root",
+    "runtime_dir": "envs/omiga/runtimes/omiga_rt1",
+    "online_steps": 50000000
+  },
+  {
+    "config": "configs/benchmarks/omiga__2ant__expert.json",
+    "benchmark": "omiga",
+    "task": "2ant",
+    "dataset": "expert",
+    "code_variant": "root",
+    "runtime_dir": "envs/omiga/runtimes/omiga_rt1",
+    "online_steps": 100000000
+  },
+  {
+    "config": "configs/benchmarks/omiga__2ant__medium.json",
+    "benchmark": "omiga",
+    "task": "2ant",
+    "dataset": "medium",
+    "code_variant": "root",
+    "runtime_dir": "envs/omiga/runtimes/omiga_rt1",
+    "online_steps": 300000000
+  },
+  {
+    "config": "configs/benchmarks/omiga__2ant__medium-replay.json",
+    "benchmark": "omiga",
+    "task": "2ant",
+    "dataset": "medium-replay",
+    "code_variant": "root",
+    "runtime_dir": "envs/omiga/runtimes/omiga_rt1",
+    "online_steps": 250000000
+  },
+  {
+    "config": "configs/benchmarks/omiga__2ant__medium-expert.json",
+    "benchmark": "omiga",
+    "task": "2ant",
+    "dataset": "medium-expert",
+    "code_variant": "root",
+    "runtime_dir": "envs/omiga/runtimes/omiga_rt2",
+    "online_steps": 100000000
+  },
+  {
+    "config": "configs/benchmarks/smac__3m__good.json",
+    "benchmark": "smac",
+    "task": "3m",
+    "dataset": "good",
+    "code_variant": "root",
+    "runtime_dir": "envs/smac/runtimes/smac_rt1",
+    "online_steps": 50000000
+  },
+  {
+    "config": "configs/benchmarks/smac__3m__medium.json",
+    "benchmark": "smac",
+    "task": "3m",
+    "dataset": "medium",
+    "code_variant": "root",
+    "runtime_dir": "envs/smac/runtimes/smac_rt2",
+    "online_steps": 50000000
+  },
+  {
+    "config": "configs/benchmarks/smac__3m__poor.json",
+    "benchmark": "smac",
+    "task": "3m",
+    "dataset": "poor",
+    "code_variant": "root",
+    "runtime_dir": "envs/smac/runtimes/smac_rt3",
+    "online_steps": 50000000
+  },
+  {
+    "config": "configs/benchmarks/smac__8m__good.json",
+    "benchmark": "smac",
+    "task": "8m",
+    "dataset": "good",
+    "code_variant": "root",
+    "runtime_dir": "envs/smac/runtimes/smac_rt5",
+    "online_steps": 50000000
+  },
+  {
+    "config": "configs/benchmarks/smac__8m__medium.json",
+    "benchmark": "smac",
+    "task": "8m",
+    "dataset": "medium",
+    "code_variant": "root",
+    "runtime_dir": "envs/smac/runtimes/smac_rt5",
+    "online_steps": 50000000
+  },
+  {
+    "config": "configs/benchmarks/smac__8m__poor.json",
+    "benchmark": "smac",
+    "task": "8m",
+    "dataset": "poor",
+    "code_variant": "root",
+    "runtime_dir": "envs/smac/runtimes/smac_rt5",
+    "online_steps": 50000000
+  },
+  {
+    "config": "configs/benchmarks/smac__2s3z__good.json",
+    "benchmark": "smac",
+    "task": "2s3z",
+    "dataset": "good",
+    "code_variant": "root",
+    "runtime_dir": "envs/smac/runtimes/smac_rt4",
+    "online_steps": 50000000
+  },
+  {
+    "config": "configs/benchmarks/smac__2s3z__medium.json",
+    "benchmark": "smac",
+    "task": "2s3z",
+    "dataset": "medium",
+    "code_variant": "root",
+    "runtime_dir": "envs/smac/runtimes/smac_rt4",
+    "online_steps": 50000000
+  },
+  {
+    "config": "configs/benchmarks/smac__2s3z__poor.json",
+    "benchmark": "smac",
+    "task": "2s3z",
+    "dataset": "poor",
+    "code_variant": "root",
+    "runtime_dir": "envs/smac/runtimes/smac_rt3",
+    "online_steps": 50000000
+  },
+  {
+    "config": "configs/benchmarks/smac__5m_vs_6m__good.json",
+    "benchmark": "smac",
+    "task": "5m_vs_6m",
+    "dataset": "good",
+    "code_variant": "variants/rev2",
+    "runtime_dir": "envs/smac/runtimes/smac_rt4",
+    "online_steps": 50000000
+  },
+  {
+    "config": "configs/benchmarks/smac__5m_vs_6m__medium.json",
+    "benchmark": "smac",
+    "task": "5m_vs_6m",
+    "dataset": "medium",
+    "code_variant": "variants/rev1_kl_backtrack",
+    "runtime_dir": "envs/smac/runtimes/smac_rt4",
+    "online_steps": 50000000
+  },
+  {
+    "config": "configs/benchmarks/smac__5m_vs_6m__poor.json",
+    "benchmark": "smac",
+    "task": "5m_vs_6m",
+    "dataset": "poor",
+    "code_variant": "root",
+    "runtime_dir": "envs/smac/runtimes/smac_rt5",
+    "online_steps": 50000000
+  },
+  {
+    "config": "configs/benchmarks/smacv2__terran_5_vs_5__replay.json",
+    "benchmark": "smacv2",
+    "task": "terran_5_vs_5",
+    "dataset": "replay",
+    "code_variant": "root",
+    "runtime_dir": "envs/smacv2/runtimes/smacv2_rt1",
+    "online_steps": 50000000
+  },
+  {
+    "config": "configs/benchmarks/smacv2__zerg_5_vs_5__replay.json",
+    "benchmark": "smacv2",
+    "task": "zerg_5_vs_5",
+    "dataset": "replay",
+    "code_variant": "root",
+    "runtime_dir": "envs/smacv2/runtimes/smacv2_rt1",
+    "online_steps": 50000000
+  },
+  {
+    "config": "configs/benchmarks/smacv2__terran_10_vs_10__replay.json",
+    "benchmark": "smacv2",
+    "task": "terran_10_vs_10",
+    "dataset": "replay",
+    "code_variant": "root",
+    "runtime_dir": "envs/smacv2/runtimes/smacv2_rt2",
+    "online_steps": 50000000
+  },
+  {
+    "config": "configs/benchmarks/mpe__simple_spread__random.json",
+    "benchmark": "mpe",
+    "task": "simple_spread",
+    "dataset": "random",
+    "code_variant": "variants/minibatch_kl",
+    "runtime_dir": "envs/mpe/runtimes/mpe_rt3",
+    "online_steps": 50000000
+  },
+  {
+    "config": "configs/benchmarks/mamujoco__2halfcheetah__good.json",
+    "benchmark": "mamujoco",
+    "task": "2halfcheetah",
+    "dataset": "good",
+    "code_variant": "variants/chunked_rollout_kl",
+    "runtime_dir": "envs/mamujoco/runtimes/mamujoco_rt1",
+    "online_steps": 200000000
+  }
+]

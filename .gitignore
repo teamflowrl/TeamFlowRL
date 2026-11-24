@@ -1,0 +1,41 @@
+# Run outputs and logs
+outputs/
+runs/
+logs/
+wandb/
+*.jsonl
+*.log
+
+# Checkpoints, weights, datasets
+checkpoints/*
+!checkpoints/README.md
+data/*
+!data/README.md
+*.pt
+*.pth
+*.ckpt
+*.npz
+*.npy
+*.pkl
+*.h5
+
+# Simulator installations and large assets
+StarCraftII/
+StarCraftII_smacv2/
+*.SC2Map
+*.SC2Replay
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/

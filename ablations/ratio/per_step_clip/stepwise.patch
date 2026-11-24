@@ -1,0 +1,141 @@
+--- generative_mappo/models.py
++++ generative_mappo/models.py
+@@ -77,7 +77,7 @@
+ class PathPolicy(nn.Module):
+     """Exact stochastic transition density, NOT marginal environment-action density.
+ 
+-    PPO uses one whole-path ratio per agent (MAPPO surrogate), never the product
++    Default PPO uses one whole-path ratio per agent (MAPPO surrogate), never the product
+     over agents. Latent coordinates and generation steps are SUMMED, not averaged.
+     The environment sees a fixed clipping/argmax map of the final latent action.
+     """
+@@ -157,6 +157,19 @@
+         return torch.stack([self.distribution(obs, chain[:,k], k).log_prob(
+             chain[:,k+1].double()).sum(-1) for k in range(self.steps)], 0).sum(0)
+ 
++    def step_log_prob(self, obs, chain):
++        """Per-transition log densities [B,K,N], summed only over latent D.
++
++        Recorded prefixes are constants; no pathwise gradient passes through
++        the old sampled chain. The parameter-independent initial z cancels.
++        """
++        expected = (len(obs), self.steps+1, *obs.shape[1:-1], self.generator.action_dim)
++        if tuple(chain.shape) != expected:
++            raise ValueError(f'Expected path {expected}, got {tuple(chain.shape)}')
++        chain = chain.detach()
++        return torch.stack([self.distribution(obs, chain[:,k], k).log_prob(
++            chain[:,k+1].double()).sum(-1) for k in range(self.steps)], 1)
++
+     def conditional_kl(self, old, obs, chain):
+         """KL(old transition || new transition), averaged over stored old prefixes.
+ 
+--- generative_mappo/ppo.py
++++ generative_mappo/ppo.py
+@@ -1,7 +1,9 @@
+ """Centralized value and decentralized MAPPO surrogate over complete denoising trajectories.
+ 
+-Each agent's complete trajectory ratio is clipped separately and multiplied by the shared
+-team advantage. Ratios use the summed log densities of all denoising transitions.
++The default uses each agent's complete trajectory ratio. The per_step option is the ablation
++that clips the ratio of each denoising transition, as DPPO does for single-agent denoising
++transitions, sums the step losses, and averages over active agents. Neither option multiplies
++ratios across agents.
+ """
+ import copy
+ import math
+@@ -46,6 +48,33 @@
+     return -weighted_mean(gain,mask),weighted_mean(approx_kl,mask)
+ 
+ 
++def stepwise_clipped_objective(new_lp,old_lp,advantage,mask,clip):
++    """Sum K clipped surrogates; retain whole-path first-order gradient scale.
++
++    At new==old, d sum_k exp(delta_k) = d exp(sum_k delta_k).
++    Averaging across K would instead shrink policy gradients by K relative to
++    unchanged reference KL / BC. Inputs are [B,K,N] and [B,N].
++    """
++    if new_lp.ndim!=3 or old_lp.shape!=new_lp.shape or advantage.shape!=mask.shape or mask.shape!=(new_lp.shape[0],new_lp.shape[2]):
++        raise ValueError('Expected per-step [B,K,N] and advantage/mask [B,N]')
++    values=[clipped_objective(new_lp[:,k],old_lp[:,k],advantage,mask,clip)
++            for k in range(new_lp.shape[1])]
++    return torch.stack([v[0] for v in values]).sum(),torch.stack([v[1] for v in values]).sum()
++
++
++def ratio_diagnostics(path_lr,step_lr,mask,clip):
++    """Diagnostics only; path KL remains the unchanged update guard."""
++    with torch.no_grad():
++        active=mask.bool()
++        selected=step_lr[active[:,None,:].expand_as(step_lr)]
++        path=path_lr[active]
++        low,high=math.log1p(-clip),math.log1p(clip)
++        return dict(path_clip_fraction=float(((path<low)|(path>high)).double().mean()),
++                    step_clip_fraction=float(((selected<low)|(selected>high)).double().mean()),
++                    step_abs_log_ratio_mean=float(selected.abs().mean()),
++                    step_abs_log_ratio_max=float(selected.abs().max()))
++
++
+ def gradient_norm(module):
+     gs=[p.grad.detach().square().sum() for p in module.parameters() if p.grad is not None]
+     return torch.stack(gs).sum().sqrt().item() if gs else 0.
+@@ -58,6 +87,8 @@
+                           target_kl=.02,max_grad_norm=.5,reference_coef=0.,bc_coef=0.,critic_warmup_iters=1)
+         self.options.update(options or {})
+         c=self.options
++        if c.get('ratio_mode','whole_path') not in ('whole_path','per_step'):
++            raise ValueError('ratio_mode must be whole_path or per_step')
+         if c['epochs']<1 or c['batch_size']<1 or not 0<c['clip']<1 or c['target_kl']<=0:
+             raise ValueError('Invalid PPO options')
+         device=next(actor.parameters()).device
+@@ -117,6 +148,15 @@
+         if not math.isfinite(replay_error) or replay_error>tolerance:
+             raise AssertionError(f'Rollout/replay log probability mismatch: {replay_error}')
+         old=copy.deepcopy(self.actor).eval().requires_grad_(False)
++        # Cache old per-step densities ONCE, before any actor/critic update.
++        # Keep the sampler and its saved whole-path likelihood unchanged.
++        with torch.no_grad():
++            old_step_lp=torch.cat([old.step_log_prob(batch['obs'][start:start+c['batch_size']],
++                batch['chain'][start:start+c['batch_size']])
++                for start in range(0,len(batch['obs']),c['batch_size'])],0)
++            step_replay_error=float((old_step_lp.sum(1)-batch['log_prob']).abs().max())
++        if not math.isfinite(step_replay_error) or step_replay_error>tolerance:
++            raise AssertionError(f'Per-step sum/rollout log probability mismatch: {step_replay_error}')
+         # Normalize team advantage, then share it across the active agents.
+         adv=batch['advantage'];adv=(adv-adv.mean())/adv.std(unbiased=False).clamp_min(1e-8)
+         adv=adv[:,None].expand_as(batch['mask'])
+@@ -135,12 +175,23 @@
+                 entry={'value_loss':float(vloss.detach())}
+                 if not stop_actor and bool(mask.any()):
+                     self.actor_opt.zero_grad(set_to_none=True)
+-                    lp=self.actor.log_prob(obs,chain)
++                    if c.get('ratio_mode','whole_path')=='per_step':
++                        step_lp=self.actor.step_log_prob(obs,chain)
++                        lp=step_lp.sum(1)
++                    else:
++                        lp=self.actor.log_prob(obs,chain)
+                     with torch.no_grad():
+                         ratios=(lp-batch['log_prob'][idx])[mask.bool()]
+                         min_log_ratio=min(min_log_ratio,float(ratios.min()))
+                         max_log_ratio=max(max_log_ratio,float(ratios.max()))
+-                    pg,_=clipped_objective(lp,batch['log_prob'][idx],adv[idx],mask,c['clip'])
++                    if c.get('ratio_mode','whole_path')=='per_step':
++                        pg,_=stepwise_clipped_objective(step_lp,old_step_lp[idx],adv[idx],mask,c['clip'])
++                    else:
++                        # Preserve the original objective and its reduction order.
++                        pg,_=clipped_objective(lp,batch['log_prob'][idx],adv[idx],mask,c['clip'])
++                        with torch.no_grad():step_lp=self.actor.step_log_prob(obs,chain)
++                    entry.update(ratio_diagnostics(lp-batch['log_prob'][idx],
++                        step_lp.detach()-old_step_lp[idx],mask,c['clip']))
+                     anchor=pg.new_zeros(());bc=pg.new_zeros(())
+                     if c['reference_coef']:
+                         anchor=weighted_mean(self.actor.conditional_kl(self.reference,obs,chain),mask)
+@@ -177,7 +228,9 @@
+                 stop_actor=last_kl>c['target_kl']
+         keys=set().union(*(m.keys() for m in metrics))
+         result={k:sum(m[k] for m in metrics if k in m)/sum(k in m for m in metrics) for k in keys}
+-        result.update(replay_error=replay_error,path_kl=last_kl,actor_updates=self.actor_updates,
++        if 'step_abs_log_ratio_max' in keys:
++            result['step_abs_log_ratio_max']=max(m['step_abs_log_ratio_max'] for m in metrics if 'step_abs_log_ratio_max' in m)
++        result.update(replay_error=replay_error,step_replay_error=step_replay_error,path_kl=last_kl,actor_updates=self.actor_updates,
+                       generator_grad_max=max_generator_grad,iteration=self.iteration,early_stop=stop_actor,
+                       min_log_ratio=min_log_ratio,max_log_ratio=max_log_ratio)
+         return result

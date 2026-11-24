@@ -1,0 +1,48 @@
+{
+  "algorithm": "A_TF_MAPPO",
+  "seed": 0,
+  "device": "cuda",
+  "torch_threads": 1,
+  "output": "outputs/mpe__simple_world__expert",
+  "source_checkpoint": "${CKPT_ROOT}/simple_world_expert/checkpoint_1000000.pt",
+  "policy": {
+    "steps": 10,
+    "initial_std": 0.1,
+    "learn_noise": true,
+    "action_type": "continuous",
+    "network_dtype": "float64"
+  },
+  "environment": {
+    "family": "mpe",
+    "task": "simple_world",
+    "runtime_dir": "envs/mpe/runtimes/mpe_rt2",
+    "n_envs": 40,
+    "data_root": "${DATA_ROOT}/mpe",
+    "action_dim": 2,
+    "workers": 2
+  },
+  "online": {
+    "steps": 150000000,
+    "rollout_steps": 128,
+    "eval_every": 250000,
+    "eval_episodes": 20
+  },
+  "ppo": {
+    "actor_lr": 2e-05,
+    "critic_lr": 0.0003,
+    "epochs": 4,
+    "batch_size": 256,
+    "clip": 0.2,
+    "target_kl": 0.02,
+    "critic_warmup_iters": 1,
+    "reference_coef": 0.0,
+    "bc_coef": 0.0,
+    "max_grad_norm": 0.5
+  },
+  "experiment": {
+    "benchmark": "mpe",
+    "task_dataset": "simple_world_expert",
+    "offline_updates": 1000000,
+    "online_env_steps": 150000000
+  }
+}

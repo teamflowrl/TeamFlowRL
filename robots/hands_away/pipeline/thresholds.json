@@ -1,0 +1,18 @@
+{
+  "ms": {
+    "tcp_cube_distance_m": 0.1302879548072815,
+    "contact_force_n": 0.001,
+    "opening_m": 0.06,
+    "hold_steps": 10,
+    "linear_speed_m_s": null,
+    "angular_speed_rad_s": null
+  },
+  "rf": {
+    "tcp_cube_distance_m": 0.15,
+    "contact_force_n": 0.001,
+    "opening_m": 0.06,
+    "hold_steps": 10,
+    "linear_speed_m_s": 0.02,
+    "angular_speed_rad_s": 0.2
+  }
+}

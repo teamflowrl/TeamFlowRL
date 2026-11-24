@@ -1,0 +1,47 @@
+{
+  "algorithm": "A_TF_MAPPO",
+  "seed": 0,
+  "device": "cuda",
+  "torch_threads": 1,
+  "output": "outputs/smacv2__terran_5_vs_5__replay",
+  "source_checkpoint": "${CKPT_ROOT}/terran_5_vs_5_Replay/checkpoint_final.pt",
+  "policy": {
+    "steps": 10,
+    "initial_std": 0.1,
+    "learn_noise": true,
+    "action_type": "discrete"
+  },
+  "environment": {
+    "family": "smacv2",
+    "task": "terran_5_vs_5",
+    "runtime_dir": "envs/smacv2/runtimes/smacv2_rt1",
+    "project_root": "envs/smacv2/runtimes/smacv2_rt1/project",
+    "sc2path": "${SC2PATH}",
+    "n_envs": 8,
+    "worker_log_dir": "outputs/smacv2__terran_5_vs_5__replay/worker_logs"
+  },
+  "online": {
+    "steps": 50000000,
+    "rollout_steps": 128,
+    "eval_every": 250000,
+    "eval_episodes": 20
+  },
+  "ppo": {
+    "actor_lr": 2e-05,
+    "critic_lr": 0.0003,
+    "epochs": 4,
+    "batch_size": 256,
+    "clip": 0.2,
+    "target_kl": 0.02,
+    "critic_warmup_iters": 1,
+    "reference_coef": 0.0,
+    "bc_coef": 0.0,
+    "max_grad_norm": 0.5
+  },
+  "experiment": {
+    "task_dataset": "terran_5_vs_5_Replay",
+    "offline_updates": 1000000,
+    "online_env_steps": 50000000,
+    "benchmark": "smacv2"
+  }
+}
