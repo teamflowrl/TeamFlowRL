@@ -3,9 +3,25 @@
 Code for **TeamFlowRL: Online Policy Optimization of Decentralized Flow Policies for
 Multi-Agent Coordination**.
 
-Guowei Zou, Beiwen Zhang, Haitao Wang, Hong Hong, Zhiquan Chen, Hejun Wu (Sun Yat-sen University)
+[Guowei Zou](https://guowei-zou.github.io/Guowei-Zou/), [Beiwen Zhang](https://beiwenzhang.github.io/BeiwenZhang/), [Haitao Wang](https://scholar.google.com/citations?user=UxDBK_MAAAAJ&hl=en), Hong Hong, [Zhiquan Chen](https://github.com/jasonZQ-C), [Hejun Wu](https://cse.sysu.edu.cn/teacher/WuHejun) (Sun Yat-sen University)
 
 [Project page](https://teamflowrl.github.io/) · [Paper](https://arxiv.org/abs/2611.32645) · [Models](https://huggingface.co/teamflowrl/TeamFlowRL)
+
+<p align="center"><img src="assets/readme/overview.gif" alt="TeamFlowRL overview" width="100%"></p>
+
+<details open>
+<summary><b>Multi-agent benchmarks</b></summary>
+
+<p align="center"><img src="assets/readme/benchmarks.gif" alt="TeamFlowRL on multi-agent benchmarks" width="100%"></p>
+
+</details>
+
+<details open>
+<summary><b>Bimanual manipulation</b></summary>
+
+<p align="center"><img src="assets/readme/robots.gif" alt="TeamFlowRL and BC+MAPPO in bimanual manipulation" width="100%"></p>
+
+</details>
 
 TeamFlowRL fine-tunes offline-pretrained flow policies online with MAPPO. Every
 agent executes its own flow policy from its local observation; the
