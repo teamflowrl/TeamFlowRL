@@ -5,7 +5,7 @@ Multi-Agent Coordination**.
 
 Guowei Zou, Beiwen Zhang, Haitao Wang, Hong Hong, Zhiquan Chen, Hejun Wu (Sun Yat-sen University)
 
-[Project page](https://teamflowrl.github.io/) · [Models](https://huggingface.co/teamflowrl/TeamFlowRL)
+[Project page](https://teamflowrl.github.io/) · [Paper](https://arxiv.org/abs/2611.32645) · [Models](https://huggingface.co/teamflowrl/TeamFlowRL)
 
 TeamFlowRL fine-tunes offline-pretrained flow policies online with MAPPO. Every
 agent executes its own flow policy from its local observation; the
@@ -230,9 +230,10 @@ The code is released under the [MIT License](LICENSE). Third-party code keeps it
 ## Citation
 
 ```bibtex
-@misc{zou2026teamflowrl,
-  title  = {TeamFlowRL: Online Policy Optimization of Decentralized Flow Policies for Multi-Agent Coordination},
-  author = {Zou, Guowei and Zhang, Beiwen and Wang, Haitao and Hong, Hong and Chen, Zhiquan and Wu, Hejun},
-  year   = {2026}
+@article{zou2026teamflowrl,
+  title   = {TeamFlowRL: Online Policy Optimization of Decentralized Flow Policies for Multi-Agent Coordination},
+  author  = {Zou, Guowei and Zhang, Beiwen and Wang, Haitao and Hong, Hong and Chen, Zhiquan and Wu, Hejun},
+  journal = {arXiv preprint arXiv:2611.32645},
+  year    = {2026}
 }
 ```
