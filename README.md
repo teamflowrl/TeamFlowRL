@@ -5,7 +5,7 @@ Multi-Agent Coordination**.
 
 [Guowei Zou](https://guowei-zou.github.io/Guowei-Zou/), [Beiwen Zhang](https://beiwenzhang.github.io/BeiwenZhang/), [Haitao Wang](https://scholar.google.com/citations?user=UxDBK_MAAAAJ&hl=en), Hong Hong, [Zhiquan Chen](https://github.com/jasonZQ-C), [Hejun Wu](https://cse.sysu.edu.cn/teacher/WuHejun) (Sun Yat-sen University)
 
-[Project page](https://teamflowrl.github.io/) · [Paper](https://arxiv.org/abs/2611.32645) · [Models](https://huggingface.co/teamflowrl/TeamFlowRL)
+[Project page](https://teamflowrl.github.io/) · [Paper](https://arxiv.org/abs/2611.32645) · [Models](https://huggingface.co/teamflowrl/TeamFlowRL) · [Video](https://youtu.be/LGSe9EpH0lU)
 
 <p align="center"><img src="assets/readme/overview.gif" alt="TeamFlowRL overview" width="100%"></p>
 
