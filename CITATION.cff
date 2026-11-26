@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the paper below."
+title: "TeamFlowRL: Online Policy Optimization of Decentralized Flow Policies for Multi-Agent Coordination"
+authors:
+  - family-names: Zou
+    given-names: Guowei
+  - family-names: Zhang
+    given-names: Beiwen
+  - family-names: Wang
+    given-names: Haitao
+  - family-names: Hong
+    given-names: Hong
+  - family-names: Chen
+    given-names: Zhiquan
+  - family-names: Wu
+    given-names: Hejun
+repository-code: "https://github.com/teamflowrl/TeamFlowRL"
+url: "https://teamflowrl.github.io/"
+license: MIT
+preferred-citation:
+  type: article
+  title: "TeamFlowRL: Online Policy Optimization of Decentralized Flow Policies for Multi-Agent Coordination"
+  authors:
+    - family-names: Zou
+      given-names: Guowei
+    - family-names: Zhang
+      given-names: Beiwen
+    - family-names: Wang
+      given-names: Haitao
+    - family-names: Hong
+      given-names: Hong
+    - family-names: Chen
+      given-names: Zhiquan
+    - family-names: Wu
+      given-names: Hejun
+  journal: "arXiv preprint arXiv:2611.32645"
+  year: 2026
+  url: "https://arxiv.org/abs/2611.32645"
